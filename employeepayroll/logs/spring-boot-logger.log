@@ -1,0 +1,42 @@
+2021-08-11 21:09:48,051 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting EmployeePayrollApplication using Java 11.0.11 on DESKTOP-N66BMGP with PID 4840 (C:\Users\User\Desktop\BridgeLabz\CFP\BridgeLabz_CFP_EmployeePayrollApp\employeepayroll\target\classes started by User in C:\Users\User\Desktop\BridgeLabz\CFP\BridgeLabz_CFP_EmployeePayrollApp\employeepayroll)
+2021-08-11 21:09:48,061 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v2.5.3, Spring v5.3.9
+2021-08-11 21:09:48,062 INFO org.springframework.boot.SpringApplication [restartedMain] The following profiles are active: dev
+2021-08-11 21:10:28,250 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-08-11 21:10:29,616 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started EmployeePayrollApplication in 53.687 seconds (JVM running for 115.789)
+2021-08-11 21:10:29,616 INFO com.bridgelabz.employeepayroll.EmployeePayrollApplication [restartedMain] Employee Payroll Application Started in DEV Environment
+2021-08-11 21:10:29,616 INFO com.bridgelabz.employeepayroll.EmployeePayrollApplication [restartedMain] Inside Main Method.
+2021-08-11 21:15:04,041 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting EmployeePayrollApplication using Java 11.0.11 on DESKTOP-N66BMGP with PID 6868 (C:\Users\User\Desktop\BridgeLabz\CFP\BridgeLabz_CFP_EmployeePayrollApp\employeepayroll\target\classes started by User in C:\Users\User\Desktop\BridgeLabz\CFP\BridgeLabz_CFP_EmployeePayrollApp\employeepayroll)
+2021-08-11 21:15:04,072 DEBUG org.springframework.boot.StartupInfoLogger [restartedMain] Running with Spring Boot v2.5.3, Spring v5.3.9
+2021-08-11 21:15:04,072 INFO org.springframework.boot.SpringApplication [restartedMain] The following profiles are active: dev
+2021-08-11 21:16:01,478 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-08-11 21:16:05,589 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started EmployeePayrollApplication in 72.846 seconds (JVM running for 108.112)
+2021-08-11 21:16:05,604 INFO com.bridgelabz.employeepayroll.EmployeePayrollApplication [restartedMain] Employee Payroll Application Started in DEV Environment
+2021-08-11 21:16:05,604 INFO com.bridgelabz.employeepayroll.EmployeePayrollApplication [restartedMain] Inside Main Method.
+2021-08-11 21:17:57,430 INFO com.bridgelabz.employeepayroll.controller.EmployeeController [http-nio-8080-exec-1] Inside getEmployeeDetails()
+2021-08-11 21:17:57,435 INFO com.bridgelabz.employeepayroll.service.EmployeeService [http-nio-8080-exec-1] Inside getEmployee()
+2021-08-11 21:19:20,917 INFO com.bridgelabz.employeepayroll.controller.EmployeeController [http-nio-8080-exec-5] Inside addEmployeeDetails()
+2021-08-11 21:19:20,919 INFO com.bridgelabz.employeepayroll.service.EmployeeService [http-nio-8080-exec-5] Inside addEmployee()
+2021-08-11 21:20:20,577 INFO com.bridgelabz.employeepayroll.controller.EmployeeController [http-nio-8080-exec-6] Inside getEmployeeDetails()
+2021-08-11 21:20:20,578 INFO com.bridgelabz.employeepayroll.service.EmployeeService [http-nio-8080-exec-6] Inside getEmployee()
+2021-08-11 21:21:53,692 INFO com.bridgelabz.employeepayroll.controller.EmployeeController [http-nio-8080-exec-8] Inside getEmployeeDetailsByID()
+2021-08-11 21:21:53,693 INFO com.bridgelabz.employeepayroll.service.EmployeeService [http-nio-8080-exec-8] Inside getEmployeeByID()
+2021-08-11 21:21:53,693 INFO com.bridgelabz.employeepayroll.service.EmployeeService [http-nio-8080-exec-8] Inside findEmployeeById()
+2021-08-11 21:22:40,297 INFO com.bridgelabz.employeepayroll.controller.EmployeeController [http-nio-8080-exec-10] Inside addEmployeeDetails()
+2021-08-11 21:22:40,298 INFO com.bridgelabz.employeepayroll.service.EmployeeService [http-nio-8080-exec-10] Inside addEmployee()
+2021-08-11 21:23:33,215 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-2] Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'id' for method parameter type int is not present]
+2021-08-11 21:23:57,696 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-3] Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'id' for method parameter type int is not present]
+2021-08-11 21:24:09,465 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-5] Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'id' for method parameter type int is not present]
+2021-08-11 21:24:37,941 INFO com.bridgelabz.employeepayroll.controller.EmployeeController [http-nio-8080-exec-7] Inside getEmployeeDetails()
+2021-08-11 21:24:37,942 INFO com.bridgelabz.employeepayroll.service.EmployeeService [http-nio-8080-exec-7] Inside getEmployee()
+2021-08-11 21:24:49,785 INFO com.bridgelabz.employeepayroll.controller.EmployeeController [http-nio-8080-exec-9] Inside updateEmployeeDetails()
+2021-08-11 21:24:49,800 INFO com.bridgelabz.employeepayroll.service.EmployeeService [http-nio-8080-exec-9] Inside updateEmployeeDetails()
+2021-08-11 21:24:49,801 INFO com.bridgelabz.employeepayroll.service.EmployeeService [http-nio-8080-exec-9] Inside findEmployeeById()
+2021-08-11 21:25:45,399 INFO com.bridgelabz.employeepayroll.controller.EmployeeController [http-nio-8080-exec-8] Inside deleteEmployeeDetails()
+2021-08-11 21:25:45,399 INFO com.bridgelabz.employeepayroll.service.EmployeeService [http-nio-8080-exec-8] Inside deleteEmployee()
+2021-08-11 21:25:45,400 INFO com.bridgelabz.employeepayroll.service.EmployeeService [http-nio-8080-exec-8] Inside findEmployeeById()
+2021-08-11 21:25:51,359 INFO com.bridgelabz.employeepayroll.controller.EmployeeController [http-nio-8080-exec-10] Inside getEmployeeDetails()
+2021-08-11 21:25:51,361 INFO com.bridgelabz.employeepayroll.service.EmployeeService [http-nio-8080-exec-10] Inside getEmployee()
+2021-08-11 21:25:56,406 INFO com.bridgelabz.employeepayroll.controller.EmployeeController [http-nio-8080-exec-2] Inside updateEmployeeDetails()
+2021-08-11 21:25:56,409 INFO com.bridgelabz.employeepayroll.service.EmployeeService [http-nio-8080-exec-2] Inside updateEmployeeDetails()
+2021-08-11 21:25:56,409 INFO com.bridgelabz.employeepayroll.service.EmployeeService [http-nio-8080-exec-2] Inside findEmployeeById()
+2021-08-11 21:25:56,792 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-2] Resolved [com.bridgelabz.employeepayroll.exception.EmployeePayrollException: Unable to find any Employee Payroll detail!]

@@ -2,106 +2,112 @@ package com.bridgelabz.employeepayroll.service;
 
 import com.bridgelabz.employeepayroll.dto.EmployeeDTO;
 import com.bridgelabz.employeepayroll.entity.Employee;
+import com.bridgelabz.employeepayroll.exception.EmployeePayrollException;
 import com.bridgelabz.employeepayroll.repository.EmployeeRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    /**
-     * Purpose : Ability to achieve all employee details from the DB.
-     * @return
-     */
-
-    public List<EmployeeDTO> getEmployee() {
-        return employeeRepository.findAll().stream().map(employee -> {
-            return new EmployeeDTO(employee.getEmpId(), employee.getEmpName(), employee.getEmpAddress(),
-                    employee.getEmpSalary(), employee.getEmpMobileNo(), employee.getEmpEmail());
-        }).collect(Collectors.toList());
-    }
+    @Autowired
+    private ModelMapper modelMapper;
 
     /**
-     * Purpose : Ability to add employee in the DB.
+     * Purpose : Ability to add employee details in Employee Payroll
      * @param employeeDTO
      * @return
      */
 
     public EmployeeDTO addEmployee(EmployeeDTO employeeDTO) {
-        Employee employee = new Employee();
-        employee.setEmpName(employeeDTO.getEmpName());
-        employee.setEmpAddress(employeeDTO.getEmpAddress());
-        employee.setEmpSalary(employeeDTO.getEmpSalary());
-        employee.setEmpMobileNo(employeeDTO.getEmpMobileNo());
-        employee.setEmpEmail(employeeDTO.getEmpEmail());
-        employeeRepository.save(employee);
+        log.info("Inside addEmployee()");
+        Employee employeeRequest = modelMapper.map(employeeDTO, Employee.class);
+        employeeRepository.save(employeeRequest);
         return employeeDTO;
     }
 
     /**
-     * Purpose : Ability to fetch details of a particular employee based on ID
+     * Purpose : Ability to fetch all employee details from Employee Payroll
+     * @return
+     */
+
+    public List<EmployeeDTO> getEmployee() {
+        log.info("Inside getEmployee()");
+        return employeeRepository.findAll().stream().map(employee -> {
+            return new EmployeeDTO(employee.getEmpId(), employee.getEmpName(), employee.getEmpAddress(),
+                                        employee.getEmpSalary(), employee.getEmpMobileNo(), employee.getEmpEmail());
+        }).collect(Collectors.toList());
+    }
+
+    /**
+     * Purpose : Ability to fetch employee details from Employee Payroll using ID
      * @param id
      * @return
      */
 
-    public Employee getEmployeeByID(int id) {
+    public EmployeeDTO getEmployeeByID(int id) {
+        log.info("Inside getEmployeeByID()");
         Employee employee = findEmployeeById(id);
-        return employee;
-    }
-
-    //    Ability to update a particular attribute of an employee based on ID
-    //    public Employee updateEmployeeDetails(int id, String phone) {
-    //        Employee employee = findEmployeeById(id);
-    //        employee.setEmpMobileNo(phone);
-    //        employeeRepository.save(employee);
-    //        return employee;
-    //    }
-
-    /**
-     * Purpose : Ability to updates all details of a particular employee based on ID
-     * @param id
-     * @param employee
-     * @return
-     */
-
-    public Employee updateEmployeeDetails(int id, Employee employee) {
-        Employee employeeDetails = findEmployeeById(id);
-        employeeDetails.setEmpName(employee.getEmpName());
-        employeeDetails.setEmpSalary(employee.getEmpSalary());
-        employeeDetails.setEmpAddress(employee.getEmpAddress());
-        employeeDetails.setEmpMobileNo(employee.getEmpMobileNo());
-        employeeDetails.setEmpEmail(employee.getEmpEmail());
-        employeeRepository.save(employeeDetails);
-        return employee;
+        EmployeeDTO employeeResponse = modelMapper.map(employee, EmployeeDTO.class);
+        return employeeResponse;
     }
 
     /**
-     * Purpose : Ability to delete a particular employee based on ID
-     * @param id
-     * @return
-     */
-
-    public String deleteEmployee(int id) {
-        Employee employee = findEmployeeById(id);
-        employeeRepository.delete(employee);
-        return "Employee deleted successfully";
-    }
-
-    /**
-     * Purpose : Ability to find an employee based on ID
+     * Purpose : Ability to update employee details in Employee Payroll using ID
      * @param id
      * @return
      */
 
     private Employee findEmployeeById(int id) {
-        return employeeRepository.findAll().stream()
-                .filter(greetingElement -> greetingElement.getEmpId() == id).findFirst()
-                .orElseThrow(() -> new RuntimeException("Unable to find any employee"));
+        log.info("Inside findEmployeeById()");
+        return employeeRepository.findById(id)
+                .orElseThrow(() -> new EmployeePayrollException("Unable to find any Employee Payroll detail!"));
+    }
+
+    /**
+     * Purpose : Ability to update employee details in Employee Payroll using ID
+     * @param id
+     * @param employeeDTO
+     * @return
+     */
+
+    public EmployeeDTO updateEmployeeDetails(int id, EmployeeDTO employeeDTO) {
+        log.info("Inside updateEmployeeDetails()");
+        EmployeeDTO employeeResponse = null;
+        if (id > 0) {
+            Employee employeeDetails = findEmployeeById(id);
+            String[] ignoreFields = {"empId", "empName"};
+            BeanUtils.copyProperties(employeeDTO, employeeDetails, ignoreFields);
+            employeeRepository.save(employeeDetails);
+            employeeResponse = modelMapper.map(employeeDetails, EmployeeDTO.class);
+        }
+        return employeeResponse;
+    }
+
+    /**
+     * Purpose : Ability to delete employee details from Employee Payroll using ID
+     * @param id
+     * @return
+     */
+
+    public EmployeeDTO deleteEmployee(int id) {
+        log.info("Inside deleteEmployee()");
+        EmployeeDTO employeeResponse = null;
+        if (id > 0) {
+            Employee employee = findEmployeeById(id);
+            employeeRepository.delete(employee);
+            employeeResponse = modelMapper.map(employee, EmployeeDTO.class);
+        }
+        return employeeResponse;
     }
 }
