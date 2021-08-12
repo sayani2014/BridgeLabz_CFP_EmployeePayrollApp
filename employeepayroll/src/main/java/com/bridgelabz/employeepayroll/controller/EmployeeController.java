@@ -2,7 +2,8 @@ package com.bridgelabz.employeepayroll.controller;
 
 import com.bridgelabz.employeepayroll.dto.EmployeeDTO;
 import com.bridgelabz.employeepayroll.dto.ResponseDTO;
-import com.bridgelabz.employeepayroll.service.EmployeeService;
+import com.bridgelabz.employeepayroll.entity.Employee;
+import com.bridgelabz.employeepayroll.service.IEmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,12 +19,12 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeService employeeService;
+    private IEmployeeService employeeService;
 
     /**
      * Purpose : Ability to add employee details in Employee Payroll
      * @param employeeDTO
-     * @return
+     * @return responseDTO
      */
 
     @PostMapping(value = "/addEmployeeDetails")
@@ -36,7 +37,7 @@ public class EmployeeController {
 
     /**
      * Purpose : Ability to fetch all employee details from Employee Payroll
-     * @return
+     * @return responseDTO
      */
 
     @GetMapping(value = "/getEmployeeDetails")
@@ -50,7 +51,7 @@ public class EmployeeController {
     /**
      * Purpose : Ability to fetch employee details from Employee Payroll using ID
      * @param id
-     * @return
+     * @return responseDTO
      */
 
     @GetMapping(value = "/getEmployeeDetailsByID")
@@ -65,7 +66,7 @@ public class EmployeeController {
      * Purpose : Ability to update employee details in Employee Payroll using ID
      * @param id
      * @param employeeDTO
-     * @return
+     * @return responseDTO
      */
 
     @PutMapping(value = "/updateEmployeeDetails")
@@ -80,14 +81,27 @@ public class EmployeeController {
     /**
      * Purpose : Ability to delete employee details from Employee Payroll using ID
      * @param id
-     * @return
+     * @return responseDTO
      */
 
     @DeleteMapping(value = "/deleteEmployeeDetails")
     public ResponseEntity<ResponseDTO> deleteEmployeeDetails(@RequestParam(name = "id") int id) {
         log.info("Inside deleteEmployeeDetails()");
-        EmployeeDTO deletedData = employeeService.deleteEmployee(id);
-        ResponseDTO responseDTO = new ResponseDTO("Deleted by ID : Employee Payroll Details", deletedData);
+        employeeService.deleteEmployee(id);
+        ResponseDTO responseDTO = new ResponseDTO("Deleted by ID : Employee Payroll Details", null);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
+    /**
+     * Purpose : Ability to get employee from DB using department name
+     * @param department
+     * @return
+     */
+
+    @GetMapping(value = "/getEmployeeByDepartment")
+    public ResponseEntity<ResponseDTO> getEmployeeByDepartment(@RequestParam(name = "department") String department) {
+        List<Employee> employeeList = employeeService.getEmployeeByDepartment(department);
+        ResponseDTO responseDTO = new ResponseDTO("Get Employee By Deprtment", employeeList);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 }

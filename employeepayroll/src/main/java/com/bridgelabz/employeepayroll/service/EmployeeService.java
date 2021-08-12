@@ -10,12 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
-public class EmployeeService {
+public class EmployeeService implements IEmployeeService{
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -29,6 +30,7 @@ public class EmployeeService {
      * @return
      */
 
+    @Override
     public EmployeeDTO addEmployee(EmployeeDTO employeeDTO) {
         log.info("Inside addEmployee()");
         Employee employeeRequest = modelMapper.map(employeeDTO, Employee.class);
@@ -41,13 +43,15 @@ public class EmployeeService {
      * @return
      */
 
+    @Override
     public List<EmployeeDTO> getEmployee() {
         log.info("Inside getEmployee()");
         return employeeRepository.findAll().stream().map(employee -> {
-            return new EmployeeDTO(employee.getEmpId(), employee.getEmpName(), employee.getEmpAddress(),
-                                        employee.getEmpSalary(), employee.getEmpMobileNo(), employee.getEmpEmail());
-        }).collect(Collectors.toList());
-    }
+            return new EmployeeDTO(employee.getEmpId(), employee.getEmpName(), employee.getEmpGender(),
+                        employee.getEmpSalary(), employee.getStartDate(), employee.getNote(), employee.getProfilePic(),
+                        employee.getDepartment());
+                        }).collect(Collectors.toList());
+        }
 
     /**
      * Purpose : Ability to fetch employee details from Employee Payroll using ID
@@ -55,6 +59,7 @@ public class EmployeeService {
      * @return
      */
 
+    @Override
     public EmployeeDTO getEmployeeByID(int id) {
         log.info("Inside getEmployeeByID()");
         Employee employee = findEmployeeById(id);
@@ -81,12 +86,13 @@ public class EmployeeService {
      * @return
      */
 
+    @Override
     public EmployeeDTO updateEmployeeDetails(int id, EmployeeDTO employeeDTO) {
         log.info("Inside updateEmployeeDetails()");
         EmployeeDTO employeeResponse = null;
         if (id > 0) {
             Employee employeeDetails = findEmployeeById(id);
-            String[] ignoreFields = {"empId", "empName"};
+            String[] ignoreFields = {"empId", "empName", "startDate"};
             BeanUtils.copyProperties(employeeDTO, employeeDetails, ignoreFields);
             employeeRepository.save(employeeDetails);
             employeeResponse = modelMapper.map(employeeDetails, EmployeeDTO.class);
@@ -100,14 +106,23 @@ public class EmployeeService {
      * @return
      */
 
-    public EmployeeDTO deleteEmployee(int id) {
+    @Override
+    public void deleteEmployee(int id) {
         log.info("Inside deleteEmployee()");
-        EmployeeDTO employeeResponse = null;
         if (id > 0) {
             Employee employee = findEmployeeById(id);
             employeeRepository.delete(employee);
-            employeeResponse = modelMapper.map(employee, EmployeeDTO.class);
         }
-        return employeeResponse;
+    }
+
+    /**
+     * Purpose : Ability to get employee details from Employee Payroll using department
+     * @param department
+     * @return
+     */
+
+    @Override
+    public List<Employee> getEmployeeByDepartment(String department) {
+        return employeeRepository.getEmployeeByDepartment(department);
     }
 }

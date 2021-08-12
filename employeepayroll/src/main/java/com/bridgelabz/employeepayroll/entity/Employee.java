@@ -2,20 +2,26 @@ package com.bridgelabz.employeepayroll.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
 public class Employee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int empId;
+
     private String empName;
-    private String empAddress;
+    private String empGender;
     private double empSalary;
-    private String empMobileNo;
-    private String empEmail;
+    private String startDate;
+    private String note;
+    private String profilePic;
+
+    @ElementCollection
+    @CollectionTable(name = "employeeDepartment", joinColumns = @JoinColumn(name = "id"))
+    private List<String> department;
 }
