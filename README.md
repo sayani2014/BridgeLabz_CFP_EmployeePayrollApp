@@ -12,4 +12,8 @@
     - Add Validation to Fields so the REST call can be validated.
     - Provide User Friendly Error Response in case validation fails.
     - Ability to throw User Friendly Errors in case Employee Id is not found in Employee Payroll App.
+2. Database setting as Environment variable.
+    - Added the concept of Interface.
+    - Updated the Bean class and added validation and customized exception.
+    - Ability to get employee from DB using department name.
  
