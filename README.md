@@ -16,4 +16,5 @@
     - Added the concept of Interface.
     - Updated the Bean class and added validation and customized exception.
     - Ability to get employee from DB using department name.
+3. Ability to add more properties in the DTO and Entity class.
  
