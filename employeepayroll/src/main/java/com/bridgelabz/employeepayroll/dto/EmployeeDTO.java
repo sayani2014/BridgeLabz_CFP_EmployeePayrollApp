@@ -13,8 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployeeDTO {
-    private int empId;
-
+    
     @NotEmpty(message = "Employee Name cannot be null")
     @Pattern(regexp = "^[A-Z][a-zA-z\\s]{2,}$", message = "Employee Name Invalid")
     private String empName;
@@ -25,15 +24,17 @@ public class EmployeeDTO {
     @Min(value = 10000, message = "Min Wage should be more than 10000")
     private double empSalary;
 
-    @NotEmpty(message = "StartDate should not be Empty")
-    private String startDate;
+    @JsonFormat(pattern = "dd MMM yyyy")
+    @NotNull(message = "StartDate should not be Empty")
+    @PastOrPresent(message = "StartDate should be past or today's date")
+    private LocalDate startDate;
 
-    @NotEmpty(message = "Note cannot be empty")
+    @NotBlank(message = "Note cannot be empty")
     private String note;
 
-    @NotEmpty(message = "Profile Pic cannot be empty")
+    @NotBlank(message = "Profile Pic cannot be empty")
     private String profilePic;
 
-    @NotEmpty(message = "Department should not be empty")
+    @NotNull(message = "Department should not be empty")
     private List<String> department;
 }

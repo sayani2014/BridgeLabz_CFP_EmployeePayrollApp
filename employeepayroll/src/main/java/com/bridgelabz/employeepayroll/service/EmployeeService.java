@@ -47,7 +47,7 @@ public class EmployeeService implements IEmployeeService{
     public List<EmployeeDTO> getEmployee() {
         log.info("Inside getEmployee()");
         return employeeRepository.findAll().stream().map(employee -> {
-            return new EmployeeDTO(employee.getEmpId(), employee.getEmpName(), employee.getEmpGender(),
+            return new EmployeeDTO(employee.getEmpName(), employee.getEmpGender(),
                         employee.getEmpSalary(), employee.getStartDate(), employee.getNote(), employee.getProfilePic(),
                         employee.getDepartment());
                         }).collect(Collectors.toList());

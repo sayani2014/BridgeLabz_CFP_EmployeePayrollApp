@@ -17,7 +17,7 @@ public class Employee {
     private String empName;
     private String empGender;
     private double empSalary;
-    private String startDate;
+    private LocalDate startDate;
     private String note;
     private String profilePic;
 
